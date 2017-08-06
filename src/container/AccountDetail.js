@@ -16,7 +16,11 @@ class AccountDetail extends Component {
     }
     const {id} = this.props.match.params;
     const {accountID} = this.props.match.params
-    console.log(this.props);
+    const userIdx = this.props.users.findIndex(user => user._id === id);
+    const accountIdx = this.props.users[userIdx].accounts.findIndex(account => account.id === parseInt(accountID, 10));
+
+    console.log(this.props.users[userIdx].accounts[accountIdx].balance);
+
 
     return (
       <div>
