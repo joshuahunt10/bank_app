@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectUser, selectAccount }  from '../actions/actions.js';
+import {selectAccount }  from '../actions/actions.js';
 //make sure action created flows through all reducers
 import { bindActionCreators } from 'redux';
 //import router Link
@@ -33,7 +33,6 @@ class UserDetail extends Component {
 
       )
     })
-    console.log('this.props on userdetail', this.props);
     return (
       <div className="col-md-6">
         <div className= "card">
@@ -58,7 +57,6 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state on userdetails');
   return {
     user: state.selectedUser,
     account: state.selectedAccount
