@@ -28,7 +28,9 @@ class AccountDetail extends Component {
               <div className= "card-text">
                 <div>${this.props.selectedAccount.balance}</div>
 
-                <button type="button" className="btn btn-primary" onClick={() => this.props.withdrawFunds(20)}>Withdraw $20</button>
+                <button type="button" className="btn btn-success" onClick={() => this.props.withdrawFunds(5)}>Withdraw $5</button>
+                <button type="button" className="btn btn-primary" onClick={() => this.props.withdrawFunds(10)}>Withdraw $10</button>
+                <button type="button" className="btn btn-warning" onClick={() => this.props.withdrawFunds(20)}>Withdraw $20</button>
 
 
               </div>

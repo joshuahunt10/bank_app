@@ -58,8 +58,11 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state on userdetails', state);
-
+  console.log('state on userdetails');
+  return {
+    user: state.selectedUser,
+    account: state.selectedAccount
+  };
 }
 
 

@@ -25,10 +25,13 @@ const reducer = function (state = initialState, action) {
     })
 
     case WITHDRAW_FUNDS:
-    const balance = state.selectedAccount.balance - action.payload
     return update(state, {
       selectedAccount: {
-        $set: balance
+        balance:{
+          $apply: function(balance){
+            return balance - action.payload
+          }
+        }
       }
     })
 
