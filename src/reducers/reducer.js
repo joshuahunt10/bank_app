@@ -14,7 +14,7 @@ const reducer = function (state = initialState, action) {
     case USER_SELECTED:
     return update(state, {
       selectedUser: {
-        $set: action.payload
+        $set: action.payload //The action comes from the action.js and the payload is what it arrived with from the actial userlist.js container.
       }
     })
     case ACCOUNT_SELECTED:
@@ -25,24 +25,35 @@ const reducer = function (state = initialState, action) {
     })
 
     case WITHDRAW_FUNDS:
-    const userIdx = state.users.findIndex(user => user._id === state.selectedUser); //find the index in the array where the user._id is the same as the selected user which is up in the state.
-    const accountIdx = state.users[userIdx].accounts.findIndex(account => account.id === state.selectedAccunt); //use the index of the user we selected to find the index of the account number that we put in the state with the ACCOUNT_SELECTED.
-
+    const balance = state.selectedAccount.balance - action.payload
     return update(state, {
-      user: {
-        [userIdx]: {
-          accounts: {
-            [accountIdx]: {
-              balance: {
-                $apply: function(balance){
-                  return balance - action.payload
-                }
-              }
-            }
-          }
-        }
+      selectedAccount: {
+        $set: balance
       }
     })
+
+    // case WITHDRAW_FUNDS:
+    // console.log('state in the reducer', state);
+    // const userIdx = state.users.findIndex(user => user._id === state.selectedUser._id); //find the index in the array where the user._id is the same as the selected user which is up in the state.
+    // console.log('userIdx in reducer',userIdx);
+    // const accountIdx = state.users[userIdx].accounts.findIndex(account => account.id === state.selectedAccount.id); //use the index of the user we selected to find the index of the account number that we put in the state with the ACCOUNT_SELECTED.
+    // console.log('accountIdx in the reducer',accountIdx);
+    //
+    // return update(state, {
+    //   users: {
+    //     [userIdx]: {
+    //       accounts: {
+    //         [accountIdx]: {
+    //           balance: {
+    //             $apply: function(balance){
+    //               return balance - action.payload
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
     default:
     return state;
 

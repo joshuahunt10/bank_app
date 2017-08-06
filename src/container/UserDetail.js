@@ -19,7 +19,7 @@ class UserDetail extends Component {
     //get user id from params of URL
     const { id } = this.props.match.params;
     //map over the accounts for the user to create links to them.
-    
+
     let accounts = this.props.user.accounts.map(account => {
 
       //creating a Link with the account type for
@@ -33,6 +33,7 @@ class UserDetail extends Component {
 
       )
     })
+    console.log('this.props on userdetail', this.props);
     return (
       <div className="col-md-6">
         <div className= "card">
@@ -57,10 +58,8 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    user: state.selectedUser,
-    account: state.selectedAccount
-  };
+  console.log('state on userdetails', state);
+
 }
 
 

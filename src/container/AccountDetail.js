@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {Link} from 'react-router-dom'
+import {withdrawFunds} from '../actions/actions.js'
 
 class AccountDetail extends Component {
 
@@ -15,10 +16,8 @@ class AccountDetail extends Component {
     }
     const {id} = this.props.match.params;
     const {accountID} = this.props.match.params
-    console.log('user id', id);
-    console.log('account id', accountID);
+    console.log(this.props);
 
-    console.log('props', this.props);
     return (
       <div>
         <div className="col-md-6">
@@ -28,6 +27,8 @@ class AccountDetail extends Component {
               <h6 className= "card-subtitle mb-2 text-muted">{this.props.selectedAccount.accountType} for {this.props.selectedUser.name}</h6>
               <div className= "card-text">
                 <div>${this.props.selectedAccount.balance}</div>
+
+                <button type="button" className="btn btn-primary" onClick={() => this.props.withdrawFunds(20)}>Withdraw $20</button>
 
 
               </div>
@@ -42,7 +43,13 @@ class AccountDetail extends Component {
 
 function mapStateToProps(state) {
   console.log('state in accountDetails', state);
-    return state;
+  return state
 }
 
-export default connect(mapStateToProps)(AccountDetail);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    withdrawFunds: withdrawFunds
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountDetail);
